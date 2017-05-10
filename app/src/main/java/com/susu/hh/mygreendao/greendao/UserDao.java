@@ -45,6 +45,9 @@ public class UserDao extends AbstractDao<User, Long> {
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"AGE\" TEXT," + // 1: age
                 "\"NAME\" TEXT);"); // 2: name
+        // Add Indexes
+        db.execSQL("CREATE UNIQUE INDEX " + constraint + "IDX_USER_AGE ON USER" +
+                " (\"AGE\" ASC);");
     }
 
     /** Drops the underlying database table. */

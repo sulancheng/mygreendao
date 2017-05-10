@@ -2,11 +2,11 @@ package com.susu.hh.mygreendao;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import com.susu.hh.mygreendao.entity.User;
 import com.susu.hh.mygreendao.greendao.DaoSession;
@@ -25,11 +25,13 @@ public class MainActivity extends Activity {
     private UserDao userDao;
     private User feng;
     private DaoSession daoSession;
+    private EditText savetest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        savetest = (EditText) findViewById(R.id.savetest);
 
 //        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(this, "myfirst-db", null);
 //        SQLiteDatabase db = devOpenHelper.getWritableDatabase();
@@ -56,14 +58,42 @@ public class MainActivity extends Activity {
 
 
         //greendao用sql语句
-        String sql = "select * from " + userDao.getTablename();
-        Cursor c = daoSession.getDatabase().rawQuery(sql, null);
-        while(c!=null && c.moveToNext()){
-
-        }
+//        String sql = "select * from " + userDao.getTablename();
+//        Cursor c = daoSession.getDatabase().rawQuery(sql, null);
+//        while(c!=null && c.moveToNext()){
+//
+//        }
         //daoSession.getDatabase().execSQL();
     }
 
+    public void save(View view){
+        String trim = savetest.getText().toString().trim();
+        File path = Environment.getExternalStorageDirectory();
+        String savepath = path.getAbsoluteFile() + "/mysave/";
+        File file3 = new File(savepath);
+       // File sd = new File(savepath);
+        if (!file3.exists()) {
+            boolean mkdirs = file3.mkdirs();
+            Log.i("fileText",mkdirs+" == "+ file3.exists());
+        }
+        try
+        {
+            // 创建文件对象
+            File fileText = new File(savepath + "saved.txt");
+            Log.i("fileText",fileText.exists()+"");
+            // 向文件写入对象写入信息
+            FileOutputStream fileWriter = new FileOutputStream(fileText,true);
+            // 写文件
+            fileWriter.write(trim.getBytes());
+            // 关闭
+            fileWriter.close();
+        }
+        catch (IOException e)
+        {
+            //
+            e.printStackTrace();
+        }
+    }
     public void copy(View view) {
         String dbname = "myfirst-db";
         File databasePath = getDatabasePath(dbname);

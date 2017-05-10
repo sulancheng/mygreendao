@@ -56,6 +56,8 @@ public class GreenDaoTest extends Activity {
                 .orderAsc(NoteBookDao.Properties.UserID)
                 .list();
        Log.i("chaxu",list1.size()+"===="+list1.get(0));
+//        noteBookDao.queryRaw("");
+//        noteBookDao.queryRawCreate("");
 
     }
     public void copyu(View view){
