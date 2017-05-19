@@ -60,6 +60,23 @@ public class GreenDaoTest extends Activity {
 //        noteBookDao.queryRawCreate("");
 
     }
+
+//    删
+//
+//    deleteBykey(Long key) ：根据主键删除一条记录。
+//    delete(User entity) ：根据实体类删除一条记录，一般结合查询方法，查询出一条记录之后删除。
+//    deleteAll()： 删除所有记录。
+//改
+//
+//update(User entity)：更新一条记录
+//查
+//
+//loadAll()：查询所有记录
+//    load(Long key)：根据主键查询一条记录
+//    queryBuilder().list()：返回：List
+//    queryBuilder().where(UserDao.Properties.Name.eq("")).list()：返回：List
+//    queryRaw(String where,String selectionArg)：返回：List
+
     public void copyu(View view){
         String dbname = "sutest_db";
         File databasePath = getDatabasePath(dbname);

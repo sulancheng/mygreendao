@@ -7,6 +7,7 @@ import com.susu.hh.mygreendao.greendao.DaoMaster;
 import com.susu.hh.mygreendao.greendao.DaoSession;
 import com.susu.hh.mygreendao.greendao.NoteBookDao;
 import com.susu.hh.mygreendao.greendao.UserDao;
+import com.susu.hh.mygreendao.help.MySQLiteOpenHelper;
 
 /**
  * Created by Administrator
@@ -22,7 +23,8 @@ public class DBManager {
 
     private DBManager(Context context) {
         this.context = context;
-        openHelper = new DaoMaster.DevOpenHelper(context, dbName, null);
+        //openHelper = new DaoMaster.DevOpenHelper(context, dbName, null);
+        openHelper = new MySQLiteOpenHelper(context, dbName, null);
     }
     /**
      * 获取单例引用
