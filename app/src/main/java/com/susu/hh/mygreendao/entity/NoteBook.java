@@ -14,6 +14,21 @@ import org.greenrobot.greendao.annotation.ToOne;
 /**
  * 这里的意思是 userId作为外键与User的主键（也就是id）相连。
  * on 2017/1/12.
+ * // 对一，实体属性 joinProperty 对应外联实体ID
+ @ToOne(joinProperty = "fk_dogId")
+ private Dog dog;
+
+ // 对多。实体ID对应外联实体属性 referencedJoinProperty
+ @ToMany(referencedJoinProperty = "fk_userId")
+ private List<Cat> cats;
+
+ // 对多。@JoinProperty：name 实体属性对应外联实体属性 referencedName
+ @ToMany(joinProperties = {
+ @JoinProperty(name = "horseName", referencedName = "name")
+ })
+
+ *
+ *
  */
 @Entity
 public class NoteBook {
