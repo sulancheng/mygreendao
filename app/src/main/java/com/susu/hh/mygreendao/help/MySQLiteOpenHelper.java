@@ -7,7 +7,7 @@ import com.susu.hh.mygreendao.greendao.DaoMaster;
 
 /**
  * Created by su
- * on 2017/5/19.
+ * on 2017/5/19.df
  */
 public class MySQLiteOpenHelper extends DaoMaster.DevOpenHelper {
     public MySQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory) {
