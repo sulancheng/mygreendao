@@ -66,7 +66,7 @@ public class DBManager {
         }
         return db;
     }
-    private DaoSession getDaoSession(){
+    public DaoSession getDaoSession(){
         if(daoMaster == null){
             daoMaster = new DaoMaster(getWritableDatabase());
         }
@@ -78,6 +78,9 @@ public class DBManager {
     public UserDao getUserDao(){
         UserDao userDao = getDaoSession().getUserDao();
         return userDao;
+    }
+    public DaoSession pubgetDaoSession(){
+        return daoSession;
     }
     public NoteBookDao getNoteBookDao(){
         NoteBookDao userDao = getDaoSession().getNoteBookDao();

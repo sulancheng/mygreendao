@@ -116,7 +116,12 @@ public class NoteBook {
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
-
+    public long getUserID() {
+        return this.userID;
+    }
+    public void setUserID(long userID) {
+        this.userID = userID;
+    }
     public String getTime() {
         return this.time;
     }
@@ -128,12 +133,6 @@ public class NoteBook {
     }
     public void setId(Long id) {
         this.id = id;
-    }
-    public long getUserID() {
-        return this.userID;
-    }
-    public void setUserID(long userID) {
-        this.userID = userID;
     }
     @Generated(hash = 502327458)
     public NoteBook(Long id, String time, long userID) {

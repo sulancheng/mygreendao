@@ -73,4 +73,5 @@ public class Student {
     @Generated(hash = 1556870573)
     public Student() {
     }
+
 }

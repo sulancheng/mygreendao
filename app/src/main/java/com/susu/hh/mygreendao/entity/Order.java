@@ -1,15 +1,14 @@
 package com.susu.hh.mygreendao.entity;
 
-import com.susu.hh.mygreendao.greendao.CustomerDao;
-import com.susu.hh.mygreendao.greendao.DaoSession;
-import com.susu.hh.mygreendao.greendao.OrderDao;
-
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToOne;
+import com.susu.hh.mygreendao.greendao.DaoSession;
+import com.susu.hh.mygreendao.greendao.OrderDao;
+import com.susu.hh.mygreendao.greendao.CustomerDao;
 
 /**
  * Created by Administrator
@@ -98,13 +97,6 @@ import org.greenrobot.greendao.annotation.ToOne;
         @Generated(hash = 8592637)
         private transient Long customer__resolvedKey;
 
-        /** called by internal mechanisms, do not call yourself. */
-        @Generated(hash = 965731666)
-        public void __setDaoSession(DaoSession daoSession) {
-            this.daoSession = daoSession;
-            myDao = daoSession != null ? daoSession.getOrderDao() : null;
-        }
-
         /** Used for active entity operations. */
         @Generated(hash = 949219203)
         private transient OrderDao myDao;
@@ -127,6 +119,13 @@ import org.greenrobot.greendao.annotation.ToOne;
 
         public void setId(Long id) {
             this.id = id;
+        }
+
+        /** called by internal mechanisms, do not call yourself. */
+        @Generated(hash = 965731666)
+        public void __setDaoSession(DaoSession daoSession) {
+            this.daoSession = daoSession;
+            myDao = daoSession != null ? daoSession.getOrderDao() : null;
         }
 
         @Generated(hash = 1580440720)

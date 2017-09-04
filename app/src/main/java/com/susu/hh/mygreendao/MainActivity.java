@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
 
         //greendao用sql语句
 //        String sql = "select * from " + userDao.getTablename();
-      //  Cursor c = daoSession.getDatabase().rawQuery(sql, null);
+//        Cursor c = daoSession.getDatabase().rawQuery(sql, null);
 //        while(c!=null && c.moveToNext()){
 //
 //        }
