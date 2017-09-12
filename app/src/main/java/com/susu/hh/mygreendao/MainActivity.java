@@ -1,6 +1,7 @@
 package com.susu.hh.mygreendao;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import com.susu.hh.mygreendao.entity.User;
 import com.susu.hh.mygreendao.greendao.DaoSession;
 import com.susu.hh.mygreendao.greendao.UserDao;
+import com.susu.hh.mygreendao.tablelyout.TablyoutActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,9 +47,9 @@ public class MainActivity extends Activity {
     public void insert(View view) {
         feng = new User(null, "28", "feng");
         userDao.insertOrReplace(feng);
-       // Intent i = new Intent(this,GreenDaoTest.class);
-//        Intent i = new Intent(this,TablyoutActivity.class);
-//        startActivity(i);
+//        Intent i = new Intent(this,GreenDaoTest.class);
+        Intent i = new Intent(this,TablyoutActivity.class);
+        startActivity(i);
     }
 
     public void insertreplace(View view) {
