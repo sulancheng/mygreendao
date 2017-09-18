@@ -40,11 +40,11 @@ public class GreenDaoTest extends Activity {
     }
     public void inserts(View view){
         User user = new User();
-        user.setAge(32+"");
-        user.setName("xiaosu2");
-        user.setId((long) 4);
+        user.setAge(22+"");
+        user.setName("我爱的小说");
+        user.setId((long) 11);
         userDao.insertOrReplace(user);
-        NoteBook haha = new NoteBook(null,"9:00",user.getId());
+        NoteBook haha = new NoteBook(null,"12:00","神墓",user.getId());
         haha.setUser(user);
         noteBookDao.insertOrReplace(haha);
     }
@@ -66,10 +66,10 @@ public class GreenDaoTest extends Activity {
     }
     public void inserts2(View view){
         User user = new User();
-        user.setId((long) 4);
-        List<NoteBook> noteBooks = cheakDbt("9:00",user);
+        user.setId((long) 11);
+        List<NoteBook> noteBooks = cheakDbt("12:00",user);
         Log.i("dadede",noteBooks.toString());
-        daimachaxu("9:00",user);
+        daimachaxu("12:00",user);
     }
     public void daimachaxu(String time,User user){
         QueryBuilder<NoteBook> noteBookQueryBuilder = noteBookDao.queryBuilder();

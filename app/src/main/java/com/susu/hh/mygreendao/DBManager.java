@@ -24,6 +24,7 @@ public class DBManager {
     private DBManager(Context context) {
         this.context = context;
         //openHelper = new DaoMaster.DevOpenHelper(context, dbName, null);
+        //MigrationHelper.DEBUG = true; //如果你想查看日志信息，请将DEBUG设置为true
         openHelper = new MySQLiteOpenHelper(context, dbName, null);
     }
     /**

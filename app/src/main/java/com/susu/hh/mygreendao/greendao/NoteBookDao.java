@@ -31,7 +31,8 @@ public class NoteBookDao extends AbstractDao<NoteBook, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Time = new Property(1, String.class, "time", false, "TIME");
-        public final static Property UserID = new Property(2, Long.class, "userID", false, "USER_ID");
+        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
+        public final static Property UserID = new Property(3, Long.class, "userID", false, "USER_ID");
     };
 
     private DaoSession daoSession;
@@ -52,7 +53,8 @@ public class NoteBookDao extends AbstractDao<NoteBook, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"NOTE_BOOK\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"TIME\" TEXT," + // 1: time
-                "\"USER_ID\" INTEGER);"); // 2: userID
+                "\"NAME\" TEXT," + // 2: name
+                "\"USER_ID\" INTEGER);"); // 3: userID
     }
 
     /** Drops the underlying database table. */
@@ -75,9 +77,14 @@ public class NoteBookDao extends AbstractDao<NoteBook, Long> {
             stmt.bindString(2, time);
         }
  
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(3, name);
+        }
+ 
         Long userID = entity.getUserID();
         if (userID != null) {
-            stmt.bindLong(3, userID);
+            stmt.bindLong(4, userID);
         }
     }
 
@@ -95,9 +102,14 @@ public class NoteBookDao extends AbstractDao<NoteBook, Long> {
             stmt.bindString(2, time);
         }
  
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(3, name);
+        }
+ 
         Long userID = entity.getUserID();
         if (userID != null) {
-            stmt.bindLong(3, userID);
+            stmt.bindLong(4, userID);
         }
     }
 
@@ -117,7 +129,8 @@ public class NoteBookDao extends AbstractDao<NoteBook, Long> {
         NoteBook entity = new NoteBook( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // time
-            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2) // userID
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // name
+            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3) // userID
         );
         return entity;
     }
@@ -126,7 +139,8 @@ public class NoteBookDao extends AbstractDao<NoteBook, Long> {
     public void readEntity(Cursor cursor, NoteBook entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setTime(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setUserID(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setUserID(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
      }
     
     @Override

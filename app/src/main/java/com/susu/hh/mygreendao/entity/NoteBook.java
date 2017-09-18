@@ -34,6 +34,7 @@ public class NoteBook {
     @Id
     private Long id;
     private String time;
+    private String name;
     private Long userID;
     @ToOne(joinProperty = "userID")
     private User user;
@@ -129,10 +130,11 @@ public class NoteBook {
     public void setId(Long id) {
         this.id = id;
     }
-    @Generated(hash = 1053264285)
-    public NoteBook(Long id, String time, Long userID) {
+    @Generated(hash = 806213997)
+    public NoteBook(Long id, String time, String name, Long userID) {
         this.id = id;
         this.time = time;
+        this.name = name;
         this.userID = userID;
     }
     @Generated(hash = 2066935268)
@@ -144,6 +146,7 @@ public class NoteBook {
         return "NoteBook{" +
                 "id=" + id +
                 ", time='" + time + '\'' +
+                ", name='" + name + '\'' +
                 ", userID=" + userID +
                 ", user=" + user +
                 ", user__resolvedKey=" + user__resolvedKey +
@@ -151,7 +154,14 @@ public class NoteBook {
                 ", daoSession=" + daoSession +
                 '}';
     }
+
     public void setUserID(Long userID) {
         this.userID = userID;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 }
