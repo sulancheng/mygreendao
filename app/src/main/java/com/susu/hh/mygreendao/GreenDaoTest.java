@@ -39,19 +39,46 @@ public class GreenDaoTest extends Activity {
 
     }
     public void inserts(View view){
-        User user = new User(null,"26","小红");
-        userDao.insert(user);
+        User user = new User();
+        user.setAge(32+"");
+        user.setName("xiaosu2");
+        user.setId((long) 4);
+        userDao.insertOrReplace(user);
         NoteBook haha = new NoteBook(null,"9:00",user.getId());
         haha.setUser(user);
-        noteBookDao.insert(haha);
+        noteBookDao.insertOrReplace(haha);
+    }
+    public void notebookInsert(String time,User user){
+        NoteBook noteBook = new NoteBook();
+        noteBookDao.insertOrReplace(noteBook);
+    }
+    public void notebookxiuz(String time,User user){
+        NoteBook noteBook = new NoteBook();
+        noteBookDao.insertOrReplace(noteBook);
+    }
+    public NoteBook cheakDb(String id){
+        List<NoteBook> noteBooks = noteBookDao.queryRaw("where _id=? order by _id asc",id);
+        return noteBooks.get(0);
+    }
+    public List<NoteBook> cheakDbt(String time,User user){
+        List<NoteBook> noteBooks = noteBookDao.queryRaw("where time=? and USER_ID=? order by _id asc", time,user.getId()+"");
+        return noteBooks;
     }
     public void inserts2(View view){
-        User user = new User(null,"27","小hei");
-        userDao.insert(user);
-        NoteBook haha = new NoteBook(null,"11:00",user.getId());
-        haha.setUser(user);
-        noteBookDao.insert(haha);
+        User user = new User();
+        user.setId((long) 4);
+        List<NoteBook> noteBooks = cheakDbt("9:00",user);
+        Log.i("dadede",noteBooks.toString());
+        daimachaxu("9:00",user);
     }
+    public void daimachaxu(String time,User user){
+        QueryBuilder<NoteBook> noteBookQueryBuilder = noteBookDao.queryBuilder();
+        List<NoteBook> list = noteBookQueryBuilder
+                .where(NoteBookDao.Properties.Time.eq(time), NoteBookDao.Properties.UserID.eq(user.getId() + ""))
+                .list();
+        Log.i("daimachaxu",list.toString());
+    }
+
     public void chaxu(View view){
         QueryBuilder<User> userQueryBuilder = userDao.queryBuilder();
         userQueryBuilder.where(UserDao.Properties.Age.eq(26)).orderAsc(UserDao.Properties.Age);
@@ -66,7 +93,7 @@ public class GreenDaoTest extends Activity {
             Log.i("chaxu",list1.size()+"===="+list1.get(0));
         }
 
-        List<NoteBook> noteBooks = noteBookDao.queryRaw("where _id=? order by _id asc","1");
+        List<NoteBook> noteBooks = noteBookDao.queryRaw("where _id=? order by _id asc","3");
         Log.i("取出数据的长度",noteBooks.size()+"");
         for (NoteBook mybook:noteBooks){
             User user = mybook.getUser();
@@ -75,7 +102,6 @@ public class GreenDaoTest extends Activity {
         List<User> users = userDao.queryRaw("where _id=?", noteBooks.get(0).getId() + "");
         Log.i("语句取出的数据=users", users.get(0).toString());
         //List<NoteBook> noteBooks = noteBookDao.queryRaw("order by _id asc","1");
-
 
         //noteBookDao.queryRawCreate("");
     }

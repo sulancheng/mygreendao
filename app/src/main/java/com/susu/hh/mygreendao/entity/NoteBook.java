@@ -8,7 +8,6 @@ import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToOne;
 
 /**
@@ -35,7 +34,7 @@ public class NoteBook {
     @Id
     private Long id;
     private String time;
-    private long userID;
+    private Long userID;
     @ToOne(joinProperty = "userID")
     private User user;
     /**
@@ -72,22 +71,18 @@ public class NoteBook {
         myDao.delete(this);
     }
     /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 1688023707)
-    public void setUser(@NotNull User user) {
-        if (user == null) {
-            throw new DaoException(
-                    "To-one property 'userID' has not-null constraint; cannot set to-one to null");
-        }
+    @Generated(hash = 1078392129)
+    public void setUser(User user) {
         synchronized (this) {
             this.user = user;
-            userID = user.getId();
+            userID = user == null ? null : user.getId();
             user__resolvedKey = userID;
         }
     }
     /** To-one relationship, resolved on first access. */
-    @Generated(hash = 1815110222)
+    @Generated(hash = 1725002132)
     public User getUser() {
-        long __key = this.userID;
+        Long __key = this.userID;
         if (user__resolvedKey == null || !user__resolvedKey.equals(__key)) {
             final DaoSession daoSession = this.daoSession;
             if (daoSession == null) {
@@ -134,8 +129,8 @@ public class NoteBook {
     public void setId(Long id) {
         this.id = id;
     }
-    @Generated(hash = 502327458)
-    public NoteBook(Long id, String time, long userID) {
+    @Generated(hash = 1053264285)
+    public NoteBook(Long id, String time, Long userID) {
         this.id = id;
         this.time = time;
         this.userID = userID;
@@ -155,5 +150,8 @@ public class NoteBook {
                 ", myDao=" + myDao +
                 ", daoSession=" + daoSession +
                 '}';
+    }
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 }
