@@ -1,9 +1,10 @@
 package com.susu.hh.mygreendao.entity;
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Property;
 
 /**
  * Created by sucheng
@@ -20,6 +21,19 @@ import org.greenrobot.greendao.annotation.Generated;
  @ToMany(joinProperties = {
  @JoinProperty(name = "horseName", referencedName = "name")
  })
+ @Entity(
+ schema = "myschema",
+
+ active = true,
+
+ nameInDb = "AWESOME_USERS",
+
+ indexes = {
+ @Index(value = "name DESC", unique = true)
+ },
+
+ createInDb = false
+ )
  */
 @Entity
 public class Student {
@@ -34,6 +48,8 @@ public class Student {
     // 非空
     @NotNull
     String age;
+    @Property(nameInDb = "RUXUEDATE")
+    Long ruxueDate;
 //    @ToMany(joinProperties = {
 //            @JoinProperty(name = "name", referencedName = "name")
 //    })
@@ -62,16 +78,33 @@ public class Student {
     public void setName(String name) {
         this.name = name;
     }
-    @Generated(hash = 143096220)
+    @Generated(hash = 716514068)
     public Student(@NotNull String name, Long stuId, @NotNull String tall,
-            @NotNull String age) {
+            @NotNull String age, Long ruxueDate) {
         this.name = name;
         this.stuId = stuId;
         this.tall = tall;
         this.age = age;
+        this.ruxueDate = ruxueDate;
     }
     @Generated(hash = 1556870573)
     public Student() {
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", stuId=" + stuId +
+                ", tall='" + tall + '\'' +
+                ", age='" + age + '\'' +
+                ", ruxueDate=" + ruxueDate +
+                '}';
+    }
+    public void setRuxueDate(Long ruxueDate) {
+        this.ruxueDate = ruxueDate;
+    }
+    public Long getRuxueDate() {
+        return this.ruxueDate;
+    }
 }

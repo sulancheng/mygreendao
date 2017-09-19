@@ -28,6 +28,7 @@ public class StudentDao extends AbstractDao<Student, Long> {
         public final static Property StuId = new Property(1, Long.class, "stuId", true, "_id");
         public final static Property Tall = new Property(2, String.class, "tall", false, "TALL");
         public final static Property Age = new Property(3, String.class, "age", false, "AGE");
+        public final static Property RuxueDate = new Property(4, Long.class, "ruxueDate", false, "RUXUEDATE");
     };
 
 
@@ -46,7 +47,8 @@ public class StudentDao extends AbstractDao<Student, Long> {
                 "\"NAME\" TEXT NOT NULL ," + // 0: name
                 "\"_id\" INTEGER PRIMARY KEY ," + // 1: stuId
                 "\"TALL\" TEXT NOT NULL ," + // 2: tall
-                "\"AGE\" TEXT NOT NULL );"); // 3: age
+                "\"AGE\" TEXT NOT NULL ," + // 3: age
+                "\"RUXUEDATE\" INTEGER);"); // 4: ruxueDate
     }
 
     /** Drops the underlying database table. */
@@ -66,6 +68,11 @@ public class StudentDao extends AbstractDao<Student, Long> {
         }
         stmt.bindString(3, entity.getTall());
         stmt.bindString(4, entity.getAge());
+ 
+        Long ruxueDate = entity.getRuxueDate();
+        if (ruxueDate != null) {
+            stmt.bindLong(5, ruxueDate);
+        }
     }
 
     @Override
@@ -79,6 +86,11 @@ public class StudentDao extends AbstractDao<Student, Long> {
         }
         stmt.bindString(3, entity.getTall());
         stmt.bindString(4, entity.getAge());
+ 
+        Long ruxueDate = entity.getRuxueDate();
+        if (ruxueDate != null) {
+            stmt.bindLong(5, ruxueDate);
+        }
     }
 
     @Override
@@ -92,7 +104,8 @@ public class StudentDao extends AbstractDao<Student, Long> {
             cursor.getString(offset + 0), // name
             cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // stuId
             cursor.getString(offset + 2), // tall
-            cursor.getString(offset + 3) // age
+            cursor.getString(offset + 3), // age
+            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4) // ruxueDate
         );
         return entity;
     }
@@ -103,6 +116,7 @@ public class StudentDao extends AbstractDao<Student, Long> {
         entity.setStuId(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
         entity.setTall(cursor.getString(offset + 2));
         entity.setAge(cursor.getString(offset + 3));
+        entity.setRuxueDate(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
      }
     
     @Override
