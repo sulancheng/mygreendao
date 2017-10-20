@@ -33,6 +33,7 @@ public class NoteBookDao extends AbstractDao<NoteBook, Long> {
         public final static Property Time = new Property(1, String.class, "time", false, "TIME");
         public final static Property Name = new Property(2, String.class, "name", false, "NAME");
         public final static Property UserID = new Property(3, Long.class, "userID", false, "USER_ID");
+        public final static Property Zishu = new Property(4, String.class, "zishu", false, "ZISHU");
     };
 
     private DaoSession daoSession;
@@ -54,7 +55,8 @@ public class NoteBookDao extends AbstractDao<NoteBook, Long> {
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"TIME\" TEXT," + // 1: time
                 "\"NAME\" TEXT," + // 2: name
-                "\"USER_ID\" INTEGER);"); // 3: userID
+                "\"USER_ID\" INTEGER," + // 3: userID
+                "\"ZISHU\" TEXT);"); // 4: zishu
     }
 
     /** Drops the underlying database table. */
@@ -86,6 +88,11 @@ public class NoteBookDao extends AbstractDao<NoteBook, Long> {
         if (userID != null) {
             stmt.bindLong(4, userID);
         }
+ 
+        String zishu = entity.getZishu();
+        if (zishu != null) {
+            stmt.bindString(5, zishu);
+        }
     }
 
     @Override
@@ -111,6 +118,11 @@ public class NoteBookDao extends AbstractDao<NoteBook, Long> {
         if (userID != null) {
             stmt.bindLong(4, userID);
         }
+ 
+        String zishu = entity.getZishu();
+        if (zishu != null) {
+            stmt.bindString(5, zishu);
+        }
     }
 
     @Override
@@ -130,7 +142,8 @@ public class NoteBookDao extends AbstractDao<NoteBook, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // time
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // name
-            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3) // userID
+            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // userID
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // zishu
         );
         return entity;
     }
@@ -141,6 +154,7 @@ public class NoteBookDao extends AbstractDao<NoteBook, Long> {
         entity.setTime(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setUserID(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
+        entity.setZishu(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     
     @Override

@@ -36,6 +36,7 @@ public class NoteBook {
     private String time;
     private String name;
     private Long userID;
+    private String zishu;
     @ToOne(joinProperty = "userID")
     private User user;
     /**
@@ -130,12 +131,13 @@ public class NoteBook {
     public void setId(Long id) {
         this.id = id;
     }
-    @Generated(hash = 806213997)
-    public NoteBook(Long id, String time, String name, Long userID) {
+    @Generated(hash = 48075641)
+    public NoteBook(Long id, String time, String name, Long userID, String zishu) {
         this.id = id;
         this.time = time;
         this.name = name;
         this.userID = userID;
+        this.zishu = zishu;
     }
     @Generated(hash = 2066935268)
     public NoteBook() {
@@ -163,5 +165,11 @@ public class NoteBook {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public String getZishu() {
+        return this.zishu;
+    }
+    public void setZishu(String zishu) {
+        this.zishu = zishu;
     }
 }

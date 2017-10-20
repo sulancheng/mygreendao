@@ -17,6 +17,7 @@ public class User {
     private Long id;
     @Index(unique = true)
     private String age;
+    private String read;
     @Property(nameInDb = "NAME")
     private String name;
     @Transient
@@ -39,10 +40,11 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-    @Generated(hash = 1829406839)
-    public User(Long id, String age, String name) {
+    @Generated(hash = 1444022149)
+    public User(Long id, String age, String read, String name) {
         this.id = id;
         this.age = age;
+        this.read = read;
         this.name = name;
     }
     @Generated(hash = 586692638)
@@ -57,5 +59,11 @@ public class User {
                 ", name='" + name + '\'' +
                 ", tempUsageCount=" + tempUsageCount +
                 '}';
+    }
+    public String getRead() {
+        return this.read;
+    }
+    public void setRead(String read) {
+        this.read = read;
     }
 }

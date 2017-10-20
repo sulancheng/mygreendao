@@ -41,7 +41,6 @@ public class GreenDaoTest extends Activity {
         studentDao = dbManagerInstance.getStudentDao();
         noteBookDao = dbManagerInstance.getNoteBookDao();
         daoSession = dbManagerInstance.pubgetDaoSession();
-
     }
 
     public void addstu(View view) {
@@ -81,24 +80,16 @@ public class GreenDaoTest extends Activity {
 
     public void inserts(View view) {
         User user = new User();
-        user.setAge(22 + "");
-        user.setName("我爱的小说");
-        user.setId((long) 11);
+        user.setAge(24 + "");
+        user.setName("我爱的你");
+        user.setId((long) 5);
+        user.setRead("我早就准备好了");
         userDao.insertOrReplace(user);
-        NoteBook haha = new NoteBook(null, "12:00", "神墓", user.getId());
+        NoteBook haha = new NoteBook(null, "12:00", "神墓", user.getId(),"12000");
         haha.setUser(user);
         noteBookDao.insertOrReplace(haha);
     }
 
-    public void notebookInsert(String time, User user) {
-        NoteBook noteBook = new NoteBook();
-        noteBookDao.insertOrReplace(noteBook);
-    }
-
-    public void notebookxiuz(String time, User user) {
-        NoteBook noteBook = new NoteBook();
-        noteBookDao.insertOrReplace(noteBook);
-    }
 
     public NoteBook cheakDb(String id) {
         List<NoteBook> noteBooks = noteBookDao.queryRaw("where _id=? order by _id asc", id);
@@ -128,7 +119,7 @@ public class GreenDaoTest extends Activity {
 
     public void chaxu(View view) {
         QueryBuilder<User> userQueryBuilder = userDao.queryBuilder();
-        userQueryBuilder.where(UserDao.Properties.Age.eq(26)).orderAsc(UserDao.Properties.Age);
+        userQueryBuilder.where(UserDao.Properties.Age.eq(22)).orderAsc(UserDao.Properties.Age);
         List<User> list = userQueryBuilder.list();
         if (list != null && list.size() != 0) {
             Log.i("chaxu", list.size() + "====" + list.get(list.size() - 1));
@@ -146,10 +137,9 @@ public class GreenDaoTest extends Activity {
             User user = mybook.getUser();
             Log.i("语句取出的数据=", mybook.toString() + "ren" + user);
         }
-        List<User> users = userDao.queryRaw("where _id=?", noteBooks.get(0).getId() + "");
+        List<User> users = userDao.queryRaw("where _id=?", noteBooks.get(0).getUserID() + "");
         Log.i("语句取出的数据=users", users.get(0).toString());
         //List<NoteBook> noteBooks = noteBookDao.queryRaw("order by _id asc","1");
-
         //noteBookDao.queryRawCreate("");
     }
 

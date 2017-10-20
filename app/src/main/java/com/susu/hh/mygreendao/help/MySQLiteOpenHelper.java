@@ -38,5 +38,6 @@ public class MySQLiteOpenHelper extends DaoMaster.DevOpenHelper {
                 DaoMaster.dropAllTables(db, ifExists);
             }
         }, NoteBookDao.class);
+        /*升级的步骤：1.在buidl 修改版本    2.在实体类加变量字段   make项目  3。像这里这样写，只有notebookdao在升级时候不会丢失数据，写谁谁数据保存着*/
     }
 }
