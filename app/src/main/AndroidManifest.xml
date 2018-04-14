@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity android:name=".GreenDaoTest"></activity>
+        <activity android:name=".GreenDaoTest" />
         <activity android:name=".tablelyout.TablyoutActivity" />
         <activity android:name=".AESandRSAActivity">
             <intent-filter>
@@ -21,7 +21,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Recycleviewactivity"></activity>
+        <activity android:name=".Recycleviewactivity" />
+
+        <service
+            android:name=".myaidl.MyService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.susu.hh.mygreendao">
+
+                </action>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
