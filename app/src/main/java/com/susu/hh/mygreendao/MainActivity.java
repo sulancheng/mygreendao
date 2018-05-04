@@ -1,6 +1,7 @@
 package com.susu.hh.mygreendao;
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -35,11 +36,11 @@ public class MainActivity extends Activity {
 //        SQLiteDatabase db = devOpenHelper.getWritableDatabase();
 //
 //        //如果是一个成熟的数据库复制进来的话。例如 电话的地理位置的。从外界复制一个db到某个地址，将地址填入第一个。
-//        SQLiteDatabase db = SQLiteDatabase.openDatabase("xx/xx/xxx.db", null, SQLiteDatabase.OPEN_READONLY);
+        SQLiteDatabase db = SQLiteDatabase.openDatabase("xx/xx/xxx.db", null, SQLiteDatabase.OPEN_READONLY);
 ////
 //        DaoMaster daoMaster = new DaoMaster(db);
 //        daoSession = daoMaster.newSession();
-//        userDao = daoSession.getUserDao();
+//        userDao = daoSession.getUserDao();//写一个与表对应的dao类
     }
 
     public void insert(View view) {

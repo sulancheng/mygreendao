@@ -2,6 +2,7 @@ package com.susu.hh.mygreendao.myaidl;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
 
@@ -18,7 +19,15 @@ public class MyService extends Service {
     public IBinder onBind(Intent intent) {
         return mIBinder;
     }
-    private IBinder mIBinder = new IMyAidlInterface.Stub(){
+    //如果是本地服务不是aidl就返回这个
+    class Mybinder extends Binder {
+        public MyService getService() {
+            return MyService.this;
+        }
+
+    }
+
+    private IBinder mIBinder = new IMyAidlInterface.Stub() {
 
         @Override
         public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
@@ -31,7 +40,7 @@ public class MyService extends Service {
         }
     };
 
-    public void show(){
+    public void show() {
         System.out.println("我被调用了，哈哈哈哈！");
     }
 }
