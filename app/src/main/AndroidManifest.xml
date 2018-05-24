@@ -15,11 +15,7 @@
         <activity android:name=".GreenDaoTest" />
         <activity android:name=".tablelyout.TablyoutActivity" />
         <activity android:name=".AESandRSAActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Recycleviewactivity" />
 
@@ -28,11 +24,17 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.susu.hh.mygreendao">
-
-                </action>
+                <action android:name="com.susu.hh.mygreendao"></action>
             </intent-filter>
         </service>
+
+        <activity android:name=".rxandroid.RxJavaTesActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

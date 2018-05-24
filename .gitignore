@@ -22,3 +22,6 @@ gradlew.bat
 local.properties
 mypowermanger/build/
 mypowermanger/mypowermanger.iml
+/gradle.properties
+/githubgreendao.iml
+/Mygreendao.iml
