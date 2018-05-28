@@ -1,1 +1,1 @@
-include ':app', ':mypowermanger'
+include ':app', ':mypowermanger','okgo'

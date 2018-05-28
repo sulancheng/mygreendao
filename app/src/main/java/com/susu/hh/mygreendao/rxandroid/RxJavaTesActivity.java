@@ -52,10 +52,23 @@ public class RxJavaTesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 start();
+                fas();
             }
         });
         et_et = findViewById(R.id.et_et);
         tv_cont = findViewById(R.id.tv_cont);
+    }
+
+    public void fas() {
+        Integer[] items = new Integer[100];
+        for (int x = 0; x < 100; x++) {
+            items[x] = x+1;
+        }
+        Observable.fromArray(items).subscribeOn(AndroidSchedulers.mainThread())
+                .doOnNext(a -> concolog(a.toString()))
+                .concatMap(a->speak(a.toString()))
+                .doOnError(err -> concolog(err.getMessage() + "erro"))//没有报异常会崩溃
+                .subscribe(getObserver());
     }
 
     public void start() {
@@ -77,7 +90,7 @@ public class RxJavaTesActivity extends AppCompatActivity {
                 })
                 .doOnNext(resulet -> concolog(resulet.toString()))
                 .doOnError(err -> concolog(err.getMessage() + "erro"))//没有报异常会崩溃
-                .doOnComplete(() -> concolog("完成了1"))
+                .doOnComplete(() -> concolog("onComplete1"))
                 .subscribe(getObserver());
     }
 
@@ -90,7 +103,7 @@ public class RxJavaTesActivity extends AppCompatActivity {
 
             @Override
             public void onNext(@NonNull Object o) {
-
+                concolog("onNext2" + o);
             }
 
             @Override
@@ -100,7 +113,7 @@ public class RxJavaTesActivity extends AppCompatActivity {
 
             @Override
             public void onComplete() {
-                concolog("完成了2");
+                concolog("onComplete2");
             }
         };
     }
@@ -109,12 +122,16 @@ public class RxJavaTesActivity extends AppCompatActivity {
     public void concolog(String text) {
         Log.i("startdayin", text);
     }
+    public Observable<String> getDataGet(String url){
+        return Observable.create((ObservableEmitter<String> e)->{
 
+        });
+    }
     public Observable<String> speak(String speaktext) {
         return Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> e) throws Exception {
-                if (speaktext.contains("i")) {
+                if (speaktext.contains("100")) {
                     e.onError(new Throwable("包含非法字符"));
                 } else {
                     e.onNext(speaktext);
