@@ -21,10 +21,10 @@ import io.reactivex.ObservableEmitter;
  */
 public class OkUtils {
 
-    public static boolean RELEASE = true;
+    public static boolean RELEASE = false;
     private static final String ADDRESS_2 = "http://hcb.leifang.xin"; //release service
-    private static final String ADDRESS_1 = "http://192.168.0.106:8080"; //local service
-    private static final String SERVICE = "/app";
+    private static final String ADDRESS_1 = "http://192.168.0.113:8081"; //local service
+    private static final String SERVICE = "/test";
     private static Gson gson = new Gson();
 
     public static String getServerChannel() {
@@ -60,10 +60,11 @@ public class OkUtils {
         requsetJsonparm(getServerChannel() + "/getExamineList", context, reparam, myresponse);
     }
     //轮播领取优惠券
-    public static Observable<String> checkQuan(Context context, Object reparam, MyResponse myresponse) {
-       return requsetJsonparm(getServerChannel() + "/checkQuan", context, reparam);
+    public static Observable<String> checkQuan(Context context, Object reparam) {
+       return requsetJsonparm(getServerChannel() + "/helloworld", context, reparam);
     }
-    public static Observable<String> requsetJsonparm(final String url, final Context mContext, Object obj) {
+
+    public static Observable<String> requsetJsonparm(String url, final Context mContext, Object obj) {
         return Observable.create((ObservableEmitter<String> e)->{
             String json = gson.toJson(obj);
             OkGo.<String>post(url)

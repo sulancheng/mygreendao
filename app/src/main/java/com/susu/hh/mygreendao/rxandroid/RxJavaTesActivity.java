@@ -5,12 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding2.view.RxView;
 import com.susu.hh.mygreendao.R;
+import com.susu.hh.mygreendao.utils.OkUtils;
+
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -43,30 +46,24 @@ public class RxJavaTesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rx_java_tes);
         findb();
-
     }
 
     private void findb() {
         bt_start = findViewById(R.id.bt_start);
-        bt_start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                start();
-                fas();
-            }
-        });
+//        bt_start.setOnClickListener(v->test4());
         et_et = findViewById(R.id.et_et);
         tv_cont = findViewById(R.id.tv_cont);
+        test4();
     }
 
     public void fas() {
         Integer[] items = new Integer[100];
         for (int x = 0; x < 100; x++) {
-            items[x] = x+1;
+            items[x] = x + 1;
         }
         Observable.fromArray(items).subscribeOn(AndroidSchedulers.mainThread())
                 .doOnNext(a -> concolog(a.toString()))
-                .concatMap(a->speak(a.toString()))
+                .concatMap(a -> speak(a.toString()))
                 .doOnError(err -> concolog(err.getMessage() + "erro"))//没有报异常会崩溃
                 .subscribe(getObserver());
     }
@@ -78,9 +75,7 @@ public class RxJavaTesActivity extends AppCompatActivity {
                 .flatMap(a -> change())
 //                .flatMap(a ->speak("今天RX入门！！！！！"))
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(result -> {
-                    tv_cont.setText(result.toString());
-                })
+                .doOnNext(result -> tv_cont.setText(result.toString()))
                 .switchMap(resulet -> speak(resulet.toString()))  //使用 switchMap来替代  flatMap， switchMap停止之前发出的请求
                 .filter(new io.reactivex.functions.Predicate<String>() {
                     @Override
@@ -108,7 +103,7 @@ public class RxJavaTesActivity extends AppCompatActivity {
 
             @Override
             public void onError(@NonNull Throwable e) {
-
+                concolog("onError" + e.getMessage());
             }
 
             @Override
@@ -122,11 +117,25 @@ public class RxJavaTesActivity extends AppCompatActivity {
     public void concolog(String text) {
         Log.i("startdayin", text);
     }
-    public Observable<String> getDataGet(String url){
-        return Observable.create((ObservableEmitter<String> e)->{
 
-        });
+    public Observable<String> getDataGet(String data) {
+        return OkUtils.checkQuan(this, data);
     }
+
+    public void test4() {
+        RxView.clicks(bt_start)
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .subscribe(a -> {
+                    getDataGet("dsa")
+                            .doOnError(erro -> concolog("erro" + erro.getMessage()))
+                            .subscribe(getObserver());
+                });
+//        filt("mydata")
+//               .concatMap(data->getDataGet(data))
+//               .doOnError(erro->concolog("erro"+erro.getMessage()))
+//               .subscribe(getObserver());
+    }
+
     public Observable<String> speak(String speaktext) {
         return Observable.create(new ObservableOnSubscribe<String>() {
             @Override
@@ -152,6 +161,16 @@ public class RxJavaTesActivity extends AppCompatActivity {
 //                        Log.e(TAG,"Send error : " + " and clear cmd queue");
 //                    }
 //                });
+    }
+
+    public Observable<String> filt(String speaktext) {
+        return Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+                e.onNext(speaktext);
+                e.onComplete();
+            }
+        });
     }
 
     public Observable<String> change() {

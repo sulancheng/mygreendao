@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'me.tatarka.retrolambda'
-
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 greendao {
     schemaVersion 3//数据库的版本
@@ -29,6 +30,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    defaultConfig {
+         multiDexEnabled true//方法过多
+    }
 }
 
 dependencies {
@@ -46,6 +50,9 @@ dependencies {
     compile 'com.trello.rxlifecycle2:rxlifecycle-navi:2.1.0'
     compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
     compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+    compile 'com.android.support:multidex:1.0.1'
     testCompile 'junit:junit:4.12'
     compile project(':okgo')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
