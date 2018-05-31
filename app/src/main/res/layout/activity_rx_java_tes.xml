@@ -20,14 +20,15 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="我石头" />
+
             <ImageView
                 android:id="@+id/iv_head"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
                 android:layout_alignParentRight="true"
-                android:src="@mipmap/ic_launcher"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:layout_width="26dp"
-                android:layout_height="26dp" />
+                android:src="@mipmap/ic_launcher" />
         </RelativeLayout>
 
         <com.susu.hh.mygreendao.widge.ObservableScrollView
@@ -62,16 +63,20 @@
                     android:text="发射"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_centerInParent="true"
-                    android:text="我石头" />
+                <com.susu.hh.mygreendao.widge.MultistageProgress
+                    android:id="@+id/mupro"
+                    android:layout_width="match_parent"
+                    android:layout_height="33dp"
+                    android:layout_gravity="center">
+
+                </com.susu.hh.mygreendao.widge.MultistageProgress>
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
                     android:layout_centerInParent="true"
+                    android:onClick="toalert"
                     android:text="我石头" />
 
                 <TextView

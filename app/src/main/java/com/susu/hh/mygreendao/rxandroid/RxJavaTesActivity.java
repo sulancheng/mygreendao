@@ -4,11 +4,14 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.CycleInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +21,7 @@ import android.widget.RelativeLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.susu.hh.mygreendao.R;
 import com.susu.hh.mygreendao.utils.OkUtils;
+import com.susu.hh.mygreendao.widge.MultistageProgress;
 import com.susu.hh.mygreendao.widge.ObservableScrollView;
 
 import java.util.concurrent.TimeUnit;
@@ -42,6 +46,7 @@ public class RxJavaTesActivity extends AppCompatActivity {
     private ObservableScrollView sv_sroll;
     private int height;
     private ImageView iv_head;
+    private MultistageProgress mupro;
 
     //成功
 //    通过 subscribeOn 和 observeOn 两个操作符能改变线程的执行状态。
@@ -109,6 +114,10 @@ public class RxJavaTesActivity extends AppCompatActivity {
         tv_cont = findViewById(R.id.tv_cont);
         rl_head = findViewById(R.id.rl_head);
         sv_sroll = findViewById(R.id.sv_sroll);
+        mupro = findViewById(R.id.mupro);
+        int[] colors ={Color.parseColor("#ff1200"),Color.parseColor("#FF4081"),Color.parseColor("#fff526")};
+        float []weights={1,2,5};
+        mupro.setColors(colors,weights);
         rl_head.post(new Runnable() {
             @Override
             public void run() {
@@ -292,5 +301,9 @@ public class RxJavaTesActivity extends AppCompatActivity {
                 // e.onError(new Throwable("cuolema"));
             }
         }).debounce(1000, MILLISECONDS);
+    }
+
+    public void toalert(View view) {
+        startActivity(new Intent(RxJavaTesActivity.this,AlertZjActivity.class));
     }
 }
