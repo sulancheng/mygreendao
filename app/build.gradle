@@ -19,6 +19,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true//方法过多
     }
     buildTypes {
         release {
@@ -30,12 +31,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    defaultConfig {
-         multiDexEnabled true//方法过多
-    }
 }
 
 dependencies {
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //  compile 'com.github.yuweiguocn:GreenDaoUpgradeHelper:v2.0.0'//数据库升级保留历史数据的帮助类
     //http://blog.csdn.net/kong_gu_you_lan/article/details/74469041
@@ -55,4 +54,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':okgo')
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+//    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }

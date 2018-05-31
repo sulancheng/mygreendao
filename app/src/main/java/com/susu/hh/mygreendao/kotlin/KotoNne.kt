@@ -11,4 +11,9 @@ class KotoNne{
     fun myPrint(text:String){
         Log.i("kotlinOne",text)
     }
+
+    override fun toString(): String {
+        return "KotoNne(kotNama='$kotNama', kotage=$kotage)"
+    }
+
 }

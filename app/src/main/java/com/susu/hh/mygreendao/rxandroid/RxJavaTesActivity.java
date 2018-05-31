@@ -1,17 +1,24 @@
 package com.susu.hh.mygreendao.rxandroid;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.animation.CycleInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.susu.hh.mygreendao.R;
 import com.susu.hh.mygreendao.utils.OkUtils;
+import com.susu.hh.mygreendao.widge.ObservableScrollView;
 
 import java.util.concurrent.TimeUnit;
 
@@ -30,7 +37,11 @@ public class RxJavaTesActivity extends AppCompatActivity {
 
     private Button bt_start;
     private EditText et_et;
-    private TextView tv_cont;
+    private Button tv_cont;
+    private RelativeLayout rl_head;
+    private ObservableScrollView sv_sroll;
+    private int height;
+    private ImageView iv_head;
 
     //成功
 //    通过 subscribeOn 和 observeOn 两个操作符能改变线程的执行状态。
@@ -44,15 +55,85 @@ public class RxJavaTesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        getSupportActionBar().hide();
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_rx_java_tes);
         findb();
     }
 
+    private Animator.AnimatorListener listener;
+
+    private Observable<String> ddAnimal() {
+        return Observable.create(a -> {
+            ObjectAnimator animator = ObjectAnimator.ofFloat(iv_head, "rotation", 0,-10,0,10,0);
+            animator.setRepeatMode(ValueAnimator.REVERSE);
+            animator.setInterpolator(new CycleInterpolator(10));
+            animator.setDuration(1000);
+            animator.start();
+
+            if (listener == null) {
+                listener = new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        animation.setStartDelay(800);
+                        animation.start();
+                        a.onNext("动画完成了");
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                };
+            }
+            animator.addListener(listener);
+        });
+
+    }
+
     private void findb() {
         bt_start = findViewById(R.id.bt_start);
+        iv_head = findViewById(R.id.iv_head);
 //        bt_start.setOnClickListener(v->test4());
         et_et = findViewById(R.id.et_et);
         tv_cont = findViewById(R.id.tv_cont);
+        rl_head = findViewById(R.id.rl_head);
+        sv_sroll = findViewById(R.id.sv_sroll);
+        rl_head.post(new Runnable() {
+            @Override
+            public void run() {
+                height = rl_head.getHeight();
+            }
+        });
+        rl_head.setAlpha(0);
+        sv_sroll.setScrollViewListener(new ObservableScrollView.ScrollViewListener() {
+            @Override
+            public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
+                Log.i("onScrollChanged", "x=" + x + " ---- y=" + y + " -----oldx=" + oldx + " ---oldy=" + oldy);
+                if (y <= height * 5) {
+                    float scale = (float) y / (height * 5);
+                    float alpha = (10 * scale);
+                    Log.i("onScrollChangedch", "scale=" + scale + " ---- alpha=" + alpha + "      heightheight=" + height);
+//          Log.i("TAG","alpha--->"+alpha);
+
+                    //layout全部透明
+//          layoutHead.setAlpha(scale);
+
+                    //只是layout背景透明(仿知乎滑动效果)
+                    rl_head.setAlpha(scale);
+                }
+            }
+        });
         test4();
     }
 
@@ -122,11 +203,13 @@ public class RxJavaTesActivity extends AppCompatActivity {
         return OkUtils.checkQuan(this, data);
     }
 
+    @SuppressLint("CheckResult")
     public void test4() {
-        RxView.clicks(bt_start)
+        RxView.clicks(tv_cont)
                 .throttleFirst(1, TimeUnit.SECONDS)
-                .subscribe(a -> {
-                    getDataGet("dsa")
+                .subscribe((Object a) -> {
+                    ddAnimal()
+                            .concatMap(done-> getDataGet(done))
                             .doOnError(erro -> concolog("erro" + erro.getMessage()))
                             .subscribe(getObserver());
                 });

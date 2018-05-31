@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="PIE_PINK">#fff526</color>
+    <color name="PIE_ORANGE">#FF4081</color>
+    <color name="PIE_YELLOW">#787878</color>
+    <color name="PIE_GREEN">#ff1200</color>
+    <color name="PIE_BLUE">#ff6582</color>
 </resources>

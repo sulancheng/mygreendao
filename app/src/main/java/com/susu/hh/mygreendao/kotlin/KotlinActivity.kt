@@ -18,6 +18,18 @@ class KotlinActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kotlin)
+        val arrayList = ArrayList<String>()
+        val kotoNne = KotoNne()
+        kotoNne.kotNama="suye"
+        val listOf = listOf<KotoNne>(KotoNne(),kotoNne)
+        listOf.forEach {a->
+            Log.i("foreach",a.toString())
+        }
+        for (index in listOf.indices) {
+            Log.i("foreach2","item at $index is ${listOf[index]}")
+        }
+
+        arrayList.add("nidhaio")
        var bt_add = findViewById<Button>(R.id.bt_add)
         RxView.clicks(bt_add)
                 .throttleFirst(1, TimeUnit.SECONDS)
