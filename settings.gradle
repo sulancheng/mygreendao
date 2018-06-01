@@ -1,1 +1,1 @@
-include ':app', ':mypowermanger','okgo','MPChartExample','MPChartLib'
+include ':app', ':mypowermanger','okgo','MPChartExample','MPChartLib','appsmarttab','form'

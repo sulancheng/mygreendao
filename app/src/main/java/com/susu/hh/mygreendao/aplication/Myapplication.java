@@ -1,7 +1,5 @@
 package com.susu.hh.mygreendao.aplication;
 
-import android.app.Application;
-
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -15,7 +13,7 @@ import okhttp3.OkHttpClient;
  * Created by su
  * on 2017/3/24.
  */
-public class Myapplication extends Application {
+public class Myapplication extends android.support.multidex.MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
