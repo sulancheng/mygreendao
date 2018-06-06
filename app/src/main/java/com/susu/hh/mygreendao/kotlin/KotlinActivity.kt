@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import com.jakewharton.rxbinding2.view.RxView
 import com.susu.hh.mygreendao.R
 import com.susu.hh.mygreendao.utils.OkUtils
@@ -18,6 +19,9 @@ class KotlinActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kotlin)
+        var ivhead =findViewById<ImageView>(R.id.iv_head)
+        ivhead.mysetBackgroundResource(R.id.iv_head)
+        var bt_add = findViewById<Button>(R.id.bt_add)
         val arrayList = ArrayList<String>()
         val kotoNne = KotoNne()
         kotoNne.kotNama="suye"
@@ -30,7 +34,7 @@ class KotlinActivity : AppCompatActivity() {
         }
 
         arrayList.add("nidhaio")
-       var bt_add = findViewById<Button>(R.id.bt_add)
+
         RxView.clicks(bt_add)
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe { a ->
@@ -81,5 +85,10 @@ class KotlinActivity : AppCompatActivity() {
     fun concolog(ii: String) {
         Log.i("日志", ii)
     }
+    /**扩展函数**/
+    fun ImageView.mysetBackgroundResource(id : Int){
+        print("用户名 $id")
+    }
+
 
 }

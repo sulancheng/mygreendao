@@ -3,7 +3,6 @@ apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
 greendao {
     schemaVersion 3//数据库的版本
     daoPackage 'com.susu.hh.mygreendao.greendao'
@@ -34,7 +33,6 @@ android {
 }
 
 dependencies {
-
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //  compile 'com.github.yuweiguocn:GreenDaoUpgradeHelper:v2.0.0'//数据库升级保留历史数据的帮助类
     //http://blog.csdn.net/kong_gu_you_lan/article/details/74469041
@@ -55,6 +53,7 @@ dependencies {
     compile 'com.github.huangyanbin:SmartTable:2.2.0'
     testCompile 'junit:junit:4.12'
     compile project(':okgo')
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile "org.java-websocket:Java-WebSocket:1.3.8"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
 //    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }

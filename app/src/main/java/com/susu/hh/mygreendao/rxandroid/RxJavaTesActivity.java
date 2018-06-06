@@ -24,6 +24,15 @@ import com.susu.hh.mygreendao.utils.OkUtils;
 import com.susu.hh.mygreendao.widge.MultistageProgress;
 import com.susu.hh.mygreendao.widge.ObservableScrollView;
 
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
+
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.Socket;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -47,6 +56,9 @@ public class RxJavaTesActivity extends AppCompatActivity {
     private int height;
     private ImageView iv_head;
     private MultistageProgress mupro;
+    private EditText et_send;
+    private Button bt_send;
+    private WebSocketClient webSocketClient;
 
     //成功
 //    通过 subscribeOn 和 observeOn 两个操作符能改变线程的执行状态。
@@ -64,13 +76,25 @@ public class RxJavaTesActivity extends AppCompatActivity {
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_rx_java_tes);
         findb();
+        onclick();
+        conn();
+    }
+
+    private void onclick() {
+        bt_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String s = et_send.getText().toString();
+                send(s);
+            }
+        });
     }
 
     private Animator.AnimatorListener listener;
 
     private Observable<String> ddAnimal() {
         return Observable.create(a -> {
-            ObjectAnimator animator = ObjectAnimator.ofFloat(iv_head, "rotation", 0,-10,0,10,0);
+            ObjectAnimator animator = ObjectAnimator.ofFloat(iv_head, "rotation", 0, -10, 0, 10, 0);
             animator.setRepeatMode(ValueAnimator.REVERSE);
             animator.setInterpolator(new CycleInterpolator(10));
             animator.setDuration(1000);
@@ -114,10 +138,12 @@ public class RxJavaTesActivity extends AppCompatActivity {
         tv_cont = findViewById(R.id.tv_cont);
         rl_head = findViewById(R.id.rl_head);
         sv_sroll = findViewById(R.id.sv_sroll);
+        et_send = findViewById(R.id.et_send);
+        bt_send = findViewById(R.id.bt_send);
         mupro = findViewById(R.id.mupro);
-        int[] colors ={Color.parseColor("#ff1200"),Color.parseColor("#FF4081"),Color.parseColor("#fff526")};
-        float []weights={1,2,5};
-        mupro.setColors(colors,weights);
+        int[] colors = {Color.parseColor("#ff1200"), Color.parseColor("#FF4081"), Color.parseColor("#fff526")};
+        float[] weights = {1, 2, 5};
+        mupro.setColors(colors, weights);
         rl_head.post(new Runnable() {
             @Override
             public void run() {
@@ -218,7 +244,7 @@ public class RxJavaTesActivity extends AppCompatActivity {
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe((Object a) -> {
                     ddAnimal()
-                            .concatMap(done-> getDataGet(done))
+                            .concatMap(done -> getDataGet(done))
                             .doOnError(erro -> concolog("erro" + erro.getMessage()))
                             .subscribe(getObserver());
                 });
@@ -304,6 +330,158 @@ public class RxJavaTesActivity extends AppCompatActivity {
     }
 
     public void toalert(View view) {
-        startActivity(new Intent(RxJavaTesActivity.this,AlertZjActivity.class));
+        startActivity(new Intent(RxJavaTesActivity.this, AlertZjActivity.class));
+    }
+
+    private Socket socket;
+
+    /**
+     * 建立服务端连接
+     */
+    public void conn() {
+//        new Thread() {
+//
+//            @Override
+//            public void run() {
+//
+//                try {
+//                    socket = new Socket("192.168.0.102", 9999);
+//                    Log.i("JAVAsocket", "建立连接：" + socket);
+//                } catch (UnknownHostException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }.start();
+
+
+//        try {
+//            WebSocketFactory webSocketFactory = new WebSocketFactory();
+//            WebSocketFactory factory = webSocketFactory.setConnectionTimeout(1000);
+//
+//// Create a WebSocket. The timeout value set above is used.
+//            ws = factory.createSocket("ws://192.168.0.102:8081/webSocketServer");
+//            ws.addListener(new WebSocketAdapter() {
+//                @Override
+//                public void onConnected(WebSocket websocket, Map<String, List<String>> headers) throws Exception {
+//                    super.onConnected(websocket, headers);
+//                    Log.i("androidwebsocket","onConnected ");
+//                }
+//
+//                @Override
+//                public void onConnectError(WebSocket websocket, WebSocketException exception) throws Exception {
+//                    super.onConnectError(websocket, exception);
+//                    Log.i("androidwebsocket","onConnectError "+exception.getError());
+//                }
+//
+//                @Override
+//                public void onDisconnected(WebSocket websocket, WebSocketFrame serverCloseFrame, WebSocketFrame clientCloseFrame, boolean closedByServer) throws Exception {
+//                    super.onDisconnected(websocket, serverCloseFrame, clientCloseFrame, closedByServer);
+//                    Log.i("androidwebsocket","onDisconnected "+closedByServer);
+//                }
+//
+//                @Override
+//                public void onStateChanged(WebSocket websocket, WebSocketState newState) throws Exception {
+//                    super.onStateChanged(websocket, newState);
+//                    Log.i("androidwebsocket","onStateChanged "+newState);
+//                }
+//
+//                @Override
+//                public void onTextMessage(WebSocket websocket, String message) throws Exception {
+//                    Log.i("android websocket","onTextMessage"+message);
+//                }
+//
+//                @Override
+//                public void onError(WebSocket websocket, WebSocketException cause) throws Exception {
+//                    super.onError(websocket, cause);
+//                    Log.i("androidwebsocket","onError"+cause.getError());
+//                }
+//            });
+//            ws.addExtension(WebSocketExtension.PERMESSAGE_DEFLATE);
+//            ws.connect();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                URI uri = null;
+                try {
+                    uri = new URI("ws://192.168.0.102:8081/webSocketServer/syuy");
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+                webSocketClient = new WebSocketClient(uri) {
+                    @Override
+                    public void onOpen(ServerHandshake handshakedata) {
+                        Log.i("androidwebsocket","onOpen"+handshakedata);
+                    }
+
+                    @Override
+                    public void onMessage(String message) {
+                        Log.i("androidwebsocket","onMessage"+message);
+                    }
+
+                    @Override
+                    public void onClose(int code, String reason, boolean remote) {
+                        Log.i("androidwebsocket","onClose "+code);
+                    }
+
+                    @Override
+                    public void onError(Exception ex) {
+                        Log.i("androidwebsocket","onError"+ex.getMessage());
+                    }
+                };
+                webSocketClient.connect();
+            }
+        }).start();
+    }
+
+    /**
+     * 发送消息
+     */
+    public void send(String txt) {
+//        new Thread() {
+//            @Override
+//            public void run() {
+//
+//                try {
+//                    // socket.getInputStream()
+//                    DataOutputStream writer = new DataOutputStream(socket.getOutputStream());
+//                    writer.writeUTF(txt); // 写一个UTF-8的信息
+//                    Log.i("JAVAsocket", "发送消息");
+//                    returnbyserver();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }.start();
+//        ws.sendText(txt);
+        webSocketClient.send(txt);
+    }
+    private void returnbyserver(){
+        //读取服务端的反馈
+        InputStream input = null;
+        DataInputStream reader;
+        try {
+            input = socket.getInputStream();
+//            reader = new DataInputStream(input);
+//            String msg = reader.readUTF();
+            byte[] bts = new byte[1024];
+            int len = input.read(bts);
+//            int len;
+//            StringBuffer result = new StringBuffer();
+//            System.out.println("JAVAsocketreturn:" + msg);
+//            while ((len = input.read(bts)) != -1) {
+                String str = new String(bts, 0, len);
+//                Log.i("JAVAsocket1",str);
+//                result.append(str);
+//            }
+            Log.i("JAVAsocketreturn", str);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

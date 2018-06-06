@@ -74,78 +74,246 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:onClick="toalert"
                     android:text="我石头" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/et_send"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <Button
+                        android:id="@+id/bt_send"
+                        android:text="发送"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_centerInParent="true"
-                    android:text="我石头" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_centerInParent="true"
-                    android:text="我石头" />
+                    <TableRow
+                        android:id="@+id/tableRow1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_centerInParent="true"
-                    android:text="我石头" />
+                        <TableLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_centerInParent="true"
-                    android:text="我石头" />
+                            <TableRow
+                                android:id="@+id/tableRow10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_centerInParent="true"
-                    android:text="我石头" />
+                                <Button
+                                    android:id="@+id/button1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="back" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_centerInParent="true"
-                    android:text="我石头" />
+                                <Button
+                                    android:id="@+id/button2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="/" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_centerInParent="true"
-                    android:text="我石头" />
+                            </TableRow>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_centerInParent="true"
-                    android:text="我石头" />
+                        </TableLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_centerInParent="true"
-                    android:text="我石头" />
+                        <Button
+                            android:id="@+id/button3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="*" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_centerInParent="true"
-                    android:text="我石头" />
+                        <Button
+                            android:id="@+id/button4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_centerInParent="true"
-                    android:text="我石头" />
+                    </TableRow>
 
+                    <TableRow
+                        android:id="@+id/tableRow2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <TableLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TableRow
+                                android:id="@+id/tableRow4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <Button
+                                    android:id="@+id/button5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="7" />
+
+                                <Button
+                                    android:id="@+id/button6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="8" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:id="@+id/tableRow5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <Button
+                                    android:id="@+id/button7"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="4" />
+
+                                <Button
+                                    android:id="@+id/button8"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="5" />
+
+                            </TableRow>
+
+                        </TableLayout>
+
+                        <TableLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TableRow
+                                android:id="@+id/tableRow6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <Button
+                                    android:id="@+id/button9"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="9" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:id="@+id/tableRow7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <Button
+                                    android:id="@+id/button10"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="6" />
+
+                            </TableRow>
+                        </TableLayout>
+
+                        <Button
+                            android:id="@+id/button11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="+" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/tableRow3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <TableLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TableRow
+                                android:id="@+id/tableRow8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <Button
+                                    android:id="@+id/button12"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="1" />
+
+                                <Button
+                                    android:id="@+id/button13"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="2" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:id="@+id/tableRow9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                            </TableRow>
+
+                            <Button
+                                android:id="@+id/button14"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="0" />
+
+                        </TableLayout>
+
+                        <TableLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TableRow
+                                android:id="@+id/tableRow11"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <Button
+                                    android:id="@+id/button15"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="3" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:id="@+id/tableRow12"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <Button
+                                    android:id="@+id/button16"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="." />
+
+                            </TableRow>
+                        </TableLayout>
+
+                        <Button
+                            android:id="@+id/button17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="=" />
+
+                    </TableRow>
+
+                </TableLayout>
             </LinearLayout>
+
         </com.susu.hh.mygreendao.widge.ObservableScrollView>
 
 

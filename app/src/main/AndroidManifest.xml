@@ -37,7 +37,8 @@
         <activity android:name=".kotlin.KotlinActivity" />
         <activity android:name=".mpandroid.MpandActivity" />
         <activity android:name=".rxandroid.AlertZjActivity" />
-        <activity android:name=".smarttab.SmartTabActivity"></activity>
+        <activity android:name=".smarttab.SmartTabActivity" />
+        <activity android:name=".rxandroid.TableLayActivity"></activity>
     </application>
 
 </manifest>
