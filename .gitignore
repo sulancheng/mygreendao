@@ -3,11 +3,11 @@
 .idea
 *.idea
 *.iml
+.iml
 app/app.iml
 app/build/
 build/
 gitgteendao.iml
-gradle/
 gradlew
 gradlew.bat
 local.properties
@@ -18,3 +18,7 @@ mypowermanger/mypowermanger.iml
 /Mygreendao.iml
 appsmarttab
 form
+gradle/
+/.idea/caches/build_file_checksums.ser
+/.idea/codeStyles/Project.xml
+/.idea/vcs.xml
