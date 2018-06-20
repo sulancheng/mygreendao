@@ -240,6 +240,12 @@ public class RxJavaTesActivity extends AppCompatActivity {
 
     @SuppressLint("CheckResult")
     public void test4() {
+        new RxUtils().setCanshuInterface(new RxUtils.Face() {
+            @Override
+            public boolean getoffOron() {
+                return false;
+            }
+        });
         RxView.clicks(tv_cont)
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe((Object a) -> {
