@@ -205,7 +205,7 @@ public class RxJavaTesActivity extends AppCompatActivity {
                 .subscribe(getObserver());
     }
 
-    private Observer<Object> getObserver() {
+    private Observer<Object> getObserver() {//观察者
         return new Observer<Object>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
