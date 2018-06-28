@@ -28,7 +28,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:src="@mipmap/ic_launcher" />
+               />
         </RelativeLayout>
 
         <com.susu.hh.mygreendao.widge.ObservableScrollView

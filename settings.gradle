@@ -1,1 +1,1 @@
-include ':app', ':mypowermanger','okgo','MPChartExample','MPChartLib'//'appsmarttab','form'
+include ':app', ':mypowermanger','okgo','MPChartExample','MPChartLib','JPushExample(981749)'//'appsmarttab','form'
