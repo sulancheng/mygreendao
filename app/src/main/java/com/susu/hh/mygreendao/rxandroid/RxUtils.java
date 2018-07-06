@@ -1,5 +1,7 @@
 package com.susu.hh.mygreendao.rxandroid;
 
+import android.util.Log;
+
 /**
  * 作者：sucheng on 2018/5/31 14:54
  */
@@ -17,6 +19,7 @@ public class RxUtils {
     public void yewu(){
         if (face!=null) {
             boolean b = face.getoffOron();//开或者关
+            Log.i("我的状态",b+"");
         }
     }
 }
