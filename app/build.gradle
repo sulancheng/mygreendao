@@ -60,5 +60,7 @@ dependencies {
     compile project(':okgo')
     compile 'org.java-websocket:Java-WebSocket:1.3.8'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    compile 'org.greenrobot:eventbus:3.0.0'
     //    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }

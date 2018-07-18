@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.susu.hh.mygreendao">
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -17,6 +17,7 @@
         <activity android:name=".tablelyout.TablyoutActivity" />
         <activity android:name=".AESandRSAActivity" />
         <activity android:name=".Recycleviewactivity" />
+
         <service
             android:name=".myaidl.MyService"
             android:enabled="true"
@@ -27,17 +28,21 @@
         </service>
 
         <activity android:name=".rxandroid.RxJavaTesActivity">
+
+        </activity>
+        <activity android:name=".kotlin.KotlinActivity" />
+        <activity android:name=".mpandroid.MpandActivity" />
+        <activity android:name=".rxandroid.AlertZjActivity" />
+        <activity android:name=".smarttab.SmartTabActivity" />
+        <activity android:name=".rxandroid.TableLayActivity" />
+
+        <activity android:name=".downloadutil.DownLoadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".kotlin.KotlinActivity" />
-        <activity android:name=".mpandroid.MpandActivity" />
-        <activity android:name=".rxandroid.AlertZjActivity" />
-        <activity android:name=".smarttab.SmartTabActivity" />
-        <activity android:name=".rxandroid.TableLayActivity"></activity>
     </application>
 
 </manifest>

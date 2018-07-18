@@ -150,7 +150,7 @@ public class RxJavaTesActivity extends AppCompatActivity {
                 height = rl_head.getHeight();
             }
         });
-        rl_head.setAlpha(0);
+        rl_head.setAlpha(1);
         sv_sroll.setScrollViewListener(new ObservableScrollView.ScrollViewListener() {
             @Override
             public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
