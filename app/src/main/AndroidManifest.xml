@@ -28,7 +28,11 @@
         </service>
 
         <activity android:name=".rxandroid.RxJavaTesActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".kotlin.KotlinActivity" />
         <activity android:name=".mpandroid.MpandActivity" />
@@ -37,11 +41,7 @@
         <activity android:name=".rxandroid.TableLayActivity" />
 
         <activity android:name=".downloadutil.DownLoadActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

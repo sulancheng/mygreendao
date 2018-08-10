@@ -81,12 +81,9 @@ public class RxJavaTesActivity extends AppCompatActivity {
     }
 
     private void onclick() {
-        bt_send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String s = et_send.getText().toString();
-                send(s);
-            }
+        bt_send.setOnClickListener((View v)->{
+            String s = et_send.getText().toString();
+            send(s);
         });
     }
 
